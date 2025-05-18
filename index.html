@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       background: black;
-      color: white;
+      color: black;
       font-family: 'Courier New', monospace;
       overflow: hidden;
       -webkit-user-select: none;
@@ -51,8 +51,6 @@
       z-index: 10;
       text-align: center;
     }
-
-    /* 📱 Мобільна адаптація */
     @media (max-width: 768px) {
       .text-container {
         font-size: 1.1em;
@@ -83,7 +81,7 @@
   <div class="left" id="leftText"></div>
 </div>
 
-<div class="overlay-message" id="startMsg">Натисніть, щоб почати</div>
+<div class="overlay-message" id="startMsg">Натисни...</div>
 
 <audio id="voiceover" src="voice.mp3"></audio>
 
@@ -117,7 +115,6 @@
     }
     nextLine();
   }
-
   function startExperience() {
     startMsg.style.display = 'none';
     video.play();
@@ -128,14 +125,10 @@
     document.removeEventListener('wheel', startExperience);
     document.removeEventListener('touchstart', startExperience);
   }
-
-  // Перезапуск відео в разі помилки loop
   video.addEventListener('ended', () => {
     video.currentTime = 0;
     video.play();
   });
-
-  // 🎯 Додано підтримку мобільних подій
   document.addEventListener('click', startExperience);
   document.addEventListener('keydown', startExperience);
   document.addEventListener('wheel', startExperience);

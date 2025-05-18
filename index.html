@@ -1,84 +1,86 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Поетичний сайт</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: black;
-      color: black;
-      font-family: 'Courier New', monospace;
-      overflow: hidden;
-      -webkit-user-select: none;
-      -webkit-touch-callout: none;
-    }
-    video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      z-index: -1;
-      object-fit: cover;
-    }
-    .text-container {
-      position: absolute;
-      top: 10%;
-      left: 5%;
-      right: 5%;
-      font-size: 1.5em;
-      font-weight: bold;
-      line-height: 1.6;
-    }
-    .left {
-      width: 100%;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-    .overlay-message {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-size: 1.3em;
-      background: rgba(0, 0, 0, 0.6);
-      padding: 16px 24px;
-      border-radius: 10px;
-      z-index: 10;
-      text-align: center;
-    }
-    @media (max-width: 768px) {
-      .text-container {
-        font-size: 1.1em;
-        top: 15%;
-      }
-      .overlay-message {
-        font-size: 1em;
-        padding: 12px 18px;
-      }
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Поетичний сайт</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: #000000;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+        .text-container {
+            position: absolute;
+            top: 10%;
+            left: 5%;
+            right: 5%;
+            font-size: 1.5em;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+        .left {
+            width: 100%;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .overlay-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 1.3em;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 16px 24px;
+            border-radius: 10px;
+            z-index: 10;
+            text-align: center;
+        }
 
-    @media (max-width: 480px) {
-      .text-container {
-        font-size: 1em;
-        top: 20%;
-      }
-    }
-  </style>
+        /* 📱 Мобільна адаптація */
+        @media (max-width: 768px) {
+            .text-container {
+                font-size: 1.1em;
+                top: 15%;
+            }
+            .overlay-message {
+                font-size: 1em;
+                padding: 12px 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text-container {
+                font-size: 1em;
+                top: 20%;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <video id="bgVideo" muted loop>
-  <source src="video.mp4" type="video/mp4">
-  Ваш браузер не підтримує відео.
+    <source src="video.mp4" type="video/mp4">
+    Ваш браузер не підтримує відео.
 </video>
 
 <div class="text-container">
-  <div class="left" id="leftText"></div>
+    <div class="left" id="leftText"></div>
 </div>
 
 <div class="overlay-message" id="startMsg">Натисни...</div>
@@ -86,53 +88,58 @@
 <audio id="voiceover" src="voice.mp3"></audio>
 
 <script>
-  const lines = [
-    "І ти ясна, і я прозорий,",
-    "І душі наші, мов пісні,",
-    "І світ великий, неозорий",
-    "Належить нам — тобі й мені.",
-    "",
-    "О море радості безкрає,",
-    "Чи я тебе перепливу?",
-    "Якби того, що в мріях маю,",
-    "Хоч краплю мати наяву."
-  ];
+    const lines = [
+        "І ти ясна, і я прозорий,",
+        "І душі наші, мов пісні,",
+        "І світ великий, неозорий",
+        "Належить нам — тобі й мені.",
+        "",
+        "О море радості безкрає,",
+        "Чи я тебе перепливу?",
+        "Якби того, що в мріях маю,",
+        "Хоч краплю мати наяву."
+    ];
 
-  const lineDuration = 2.875 * 1000;
-  const leftContainer = document.getElementById('leftText');
-  const voiceover = document.getElementById('voiceover');
-  const video = document.getElementById('bgVideo');
-  const startMsg = document.getElementById('startMsg');
+    const lineDuration = 2.875 * 1000;
+    const leftContainer = document.getElementById('leftText');
+    const voiceover = document.getElementById('voiceover');
+    const video = document.getElementById('bgVideo');
+    const startMsg = document.getElementById('startMsg');
 
-  function showLines() {
-    let index = 0;
-    function nextLine() {
-      if (index < lines.length) {
-        leftContainer.textContent += lines[index] + "\n";
-        index++;
-        setTimeout(nextLine, lineDuration);
-      }
+    function showLines() {
+        let index = 0;
+        function nextLine() {
+            if (index < lines.length) {
+                leftContainer.textContent += lines[index] + "\n";
+                index++;
+                setTimeout(nextLine, lineDuration);
+            }
+        }
+        nextLine();
     }
-    nextLine();
-  }
-  function startExperience() {
-    startMsg.style.display = 'none';
-    video.play();
-    voiceover.play().catch(err => console.warn("Аудіо не вдалося відтворити:", err));
-    showLines();
-    document.removeEventListener('click', startExperience);
-    document.removeEventListener('keydown', startExperience);
-    document.removeEventListener('wheel', startExperience);
-    document.removeEventListener('touchstart', startExperience);
-  }
-  video.addEventListener('ended', () => {
-    video.currentTime = 0;
-    video.play();
-  });
-  document.addEventListener('click', startExperience);
-  document.addEventListener('keydown', startExperience);
-  document.addEventListener('wheel', startExperience);
-  document.addEventListener('touchstart', startExperience);
+
+    function startExperience() {
+        startMsg.style.display = 'none';
+        video.play();
+        voiceover.play().catch(err => console.warn("Аудіо не вдалося відтворити:", err));
+        showLines();
+        document.removeEventListener('click', startExperience);
+        document.removeEventListener('keydown', startExperience);
+        document.removeEventListener('wheel', startExperience);
+        document.removeEventListener('touchstart', startExperience);
+    }
+
+    // Перезапуск відео в разі помилки loop
+    video.addEventListener('ended', () => {
+        video.currentTime = 0;
+        video.play();
+    });
+
+    // 🎯 Додано підтримку мобільних подій
+    document.addEventListener('click', startExperience);
+    document.addEventListener('keydown', startExperience);
+    document.addEventListener('wheel', startExperience);
+    document.addEventListener('touchstart', startExperience);
 </script>
 
 </body>
